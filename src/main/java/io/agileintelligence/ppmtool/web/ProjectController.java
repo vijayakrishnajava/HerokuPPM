@@ -1,5 +1,6 @@
 package io.agileintelligence.ppmtool.web;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import io.agileintelligence.ppmtool.service.ProjectService;
 import io.agileintelligence.ppmtool.service.UserService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/project")
 public class ProjectController {
 
@@ -42,7 +44,6 @@ public class ProjectController {
 	UserService userService;
 	
 	@PostMapping
-	@CrossOrigin(origins = "http://localhost:3000")
 	ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 		
 		ResponseEntity<?> errors = this.mapValidationService.MapvalidatedResults(result);
@@ -58,7 +59,6 @@ public class ProjectController {
 	
 	
 	@GetMapping("/{identifier}")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> findProject(@PathVariable("identifier") String identiier) {
 		
 		Project project = this.projectService.findProject(identiier,this.userService.getUserFromSecurityContext());
@@ -75,7 +75,6 @@ public class ProjectController {
 	}
 	
 	@DeleteMapping("/{identifier}")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> deleteProject(@PathVariable String identifier) { 
 
 		this.projectService.deleteProject(identifier, this.userService.getUserFromSecurityContext());

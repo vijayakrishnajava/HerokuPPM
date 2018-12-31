@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,7 @@ import io.agileintelligence.ppmtool.service.UserService;
 import io.agileintelligence.ppmtool.validator.UserValidator;
 
 @RestController
+@CrossOrigin
 public class RegistrationController {
 	
 	@Autowired
@@ -52,7 +55,6 @@ public class RegistrationController {
 	
 	@PostMapping
 	@RequestMapping("/login")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest, BindingResult result) {
 
 		ResponseEntity<?> errors = this.mapValidationService.MapvalidatedResults(result);
@@ -83,7 +85,6 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/validate")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> validateToken(@RequestBody Token token) {
 		boolean isValid = this.jwtTokenGenerator.validateToken(token.getToken());
 		
@@ -95,7 +96,6 @@ public class RegistrationController {
 	
 	@PostMapping
 	@RequestMapping("/registration")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> registration(@Valid @RequestBody User user, BindingResult result) {
 		
 		userValidator.validate(user, result);

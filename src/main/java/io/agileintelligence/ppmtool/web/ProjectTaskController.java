@@ -26,7 +26,7 @@ import io.agileintelligence.ppmtool.service.UserService;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 public class ProjectTaskController {
 
 	@Autowired
@@ -37,7 +37,6 @@ public class ProjectTaskController {
 	
 	
 	@GetMapping("/{projectIdentifier}")
-	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<?> getAll(@PathVariable("projectIdentifier") String projectIdentifier) {
 		
 		List<ProjectTask> tasks = this.projectTaskService.findTasksByIdentifier(projectIdentifier, this.userService.getUserFromSecurityContext());
@@ -45,7 +44,6 @@ public class ProjectTaskController {
 	}
 
 	@PostMapping("/{projectIdentifier}")
-	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<?> save(@PathVariable("projectIdentifier") String projectIdentifier,
 			@RequestBody @Valid ProjectTask projectTask, BindingResult result) {
 		
@@ -61,7 +59,6 @@ public class ProjectTaskController {
 	}
 
 	@PutMapping("/{projectIdentifier}/{projectseq}")
-	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<?> update(@PathVariable("projectIdentifier") String projectIdentifier, @PathVariable("projectseq") String projectseq,
 			@RequestBody @Valid ProjectTask projectTask, BindingResult result) {
 		
@@ -80,7 +77,6 @@ public class ProjectTaskController {
 
 	
 	@GetMapping("/{projectIdentifier}/{projectSeq}")
-	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<?> getTask(@PathVariable("projectIdentifier") String projectIdentifier,
 			@PathVariable("projectSeq") String projectSeq) {
 		
@@ -89,7 +85,6 @@ public class ProjectTaskController {
 	}
 	
 	@DeleteMapping("/{projectIdentifier}/{projectSeq}")
-	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<?> deleteTask(@PathVariable("projectIdentifier") String projectIdentifier,
 			@PathVariable("projectSeq") String projectSeq) {
 		
@@ -121,4 +116,6 @@ public class ProjectTaskController {
 		
 	}
 
+	
+	
 }
